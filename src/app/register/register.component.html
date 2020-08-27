@@ -1,0 +1,166 @@
+<div class="container" style="background:#222222">
+  <mat-toolbar>
+      <div class="newProduct">
+  
+       
+          <span>Kayıt Ol</span>
+          <button mat-stroked-button tabindex="-1" (click)="onClose()"><mat-icon>close</mat-icon></button>
+         </div>
+     
+  
+  </mat-toolbar>
+      <form class="form" >
+          <mat-horizontal-stepper linear #stepper style="background:#222222">
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup" (ngSubmit)="form1()" #formone="ngForm">
+                  <ng-template matStepLabel><span style="color:white">Kullanıcı Bilgileri</span></ng-template>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="inputs" class="my-auto">
+                              
+                              <mat-form-field class="full-width"  appearance="outline" floatLabel="always"  id="name" >
+                                  <mat-label>İsim</mat-label>
+                                  <input matInput formControlName="name"  required>
+                                  
+                              </mat-form-field>
+                              <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('name').touched && firstFormGroup.get('name').errors?.required">Bu alan boş bırakılamaz.</p>
+                              <mat-form-field class="full-width"  appearance="outline" floatLabel="always"  id="surname">
+                                <mat-label>Soyisim</mat-label>
+                                <input matInput formControlName="surname" required>
+                            </mat-form-field>
+                            <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('surname').touched && firstFormGroup.get('surname').errors?.required">Bu alan boş bırakılamaz.</p>
+                              
+                              <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="username">
+                                <mat-label>Kullanıcı Adı</mat-label>
+                                <input matInput formControlName="username" required>
+                            </mat-form-field>
+                            <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('username').touched && firstFormGroup.get('username').errors?.required">Bu alan boş bırakılamaz.</p>
+                            <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="email">
+                              <mat-label>Email Adresi</mat-label>
+                              <input matInput formControlName="email" required>
+                          </mat-form-field>
+                            <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('email').touched && firstFormGroup.get('email').errors?.required">Bu alan boş bırakılamaz.</p>
+                            <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('email').touched && firstFormGroup.get('email').errors?.email">Lütfen doğru tip email adresi giriniz.</p>
+                          
+                          </div>
+              
+                      </div>
+                      <div class="col-md-6">
+                          <div class="inputs" class="my-auto">
+                            <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="phone">
+                              <mat-label>Telefon Numarası</mat-label>
+                              <input matInput formControlName="phoneNumber" required>
+                          </mat-form-field>
+                          <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('phoneNumber').touched && firstFormGroup.get('phoneNumber').errors?.required">Bu alan boş bırakılamaz.</p>
+                              
+                              
+                              <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="address">
+                                  <mat-label>Adres</mat-label>
+                                  <input matInput formControlName="address" required>
+                              </mat-form-field>
+                              <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('address').touched && firstFormGroup.get('address').errors?.required">Bu alan boş bırakılamaz.</p>
+                              <div formGroupName="Passwords">
+                                <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="password">
+                                  <mat-label>Şifre</mat-label>
+                                  <input matInput formControlName="password" type="password" required id="password" showHideInput>
+                                  <i matSuffix class="material-icons" showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
+                              </mat-form-field>
+                              <p style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('Passwords.password').touched && firstFormGroup.get('Passwords.password').errors?.required">Bu alan boş bırakılamaz.</p>
+                              <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="confirmPassword">
+                                <mat-label>Şifre Tekrar</mat-label>
+                                <input matInput formControlName="confirmPassword" type="password" required id="confirmPassword" showHideInput>
+                                <i matSuffix class="material-icons" showHideTrigger="confirmPassword" [showHideStatus]="{ materialIcon: true, id: 'confirmPassword' }"></i>
+                            </mat-form-field>
+                            <p style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('Passwords.confirmPassword').touched && firstFormGroup.get('Passwords.confirmPassword').errors?.required">Bu alan boş bırakılamaz.</p>
+                          <p  style="margin-top:-18px;color:red" *ngIf="firstFormGroup.get('Passwords.confirmPassword').touched && firstFormGroup.get('Passwords.confirmPassword').errors?.passwordMismatch">Şifre alanları eşleşmelidir. </p>
+                          
+                              </div>
+                              
+                            
+                              
+                          
+                          </div>
+              
+                      </div>
+                  </div>
+                  <button mat-button matStepperNext [disabled]="formone.invalid" [ngStyle]="formone.invalid? {'background':'grey'} : {'background':'#e16428'}">İleri</button>
+                  
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup" (ngSubmit)="form2()" #formtwo="ngForm">
+                  <ng-template matStepLabel><span style="color:white">Dükkan Bilgileri</span></ng-template>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="inputs" class="my-auto">
+                            
+                            <mat-form-field class="full-width"  appearance="outline" floatLabel="always"  id="name">
+                                <mat-label>Salon Adı</mat-label>
+                                <input matInput formControlName="storeName" required>
+                            </mat-form-field>
+                            <p style="margin-top:-18px;color:red" *ngIf="secondFormGroup.get('storeName').touched && secondFormGroup.get('storeName').errors?.required">Bu alan boş bırakılamaz.</p>
+                            
+                            <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="phone">
+                                <mat-label>Salonun Telefon Numarası</mat-label>
+                                <input matInput formControlName="storePhoneNumber" required>
+                            </mat-form-field>
+                            <p style="margin-top:-18px;color:red" *ngIf="secondFormGroup.get('storePhoneNumber').touched && secondFormGroup.get('storePhoneNumber').errors?.required">Bu alan boş bırakılamaz.</p>
+                            
+                            
+                        
+                        </div>
+            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="inputs" class="my-auto">
+                            
+                            <mat-form-field class="full-width"  appearance="outline" floatLabel="always"  id="surname">
+                                <mat-label>Salonun Adresi</mat-label>
+                                <input matInput formControlName="storeAddress" required>
+                            </mat-form-field>
+                            <p style="margin-top:-18px;color:red" *ngIf="secondFormGroup.get('storeAddress').touched && secondFormGroup.get('storeAddress').errors?.required">Bu alan boş bırakılamaz.</p>
+                            
+                            <mat-form-field class="full-width select-box" appearance="outline" floatLabel="always" id="address">
+                                <mat-label>Salon Tipi</mat-label>
+                                <mat-select formControlName="storeType" required>
+                                  <mat-option style="color:whitesmoke" value="Kadın">Kadın</mat-option>
+                                  <mat-option style="color:whitesmoke" value="Erkek">Erkek</mat-option>
+                                 
+                                </mat-select>
+                                
+                            </mat-form-field>
+                            <p style="margin-top:-18px;color:red" *ngIf="secondFormGroup.get('storeType').touched && secondFormGroup.get('storeType').errors?.required">Bu alan boş bırakılamaz.</p>
+                           
+                            
+                        
+                        </div>
+            
+                    </div>
+                </div>
+                <button mat-button matStepperPrevious class="mr-2" [disabled]="formone.invalid" [ngStyle]="formone.invalid? {'background':'grey'} : {'background':'#e16428'}">Geri</button>
+                <button mat-button matStepperNext [disabled]="formtwo.invalid" [ngStyle]="formtwo.invalid? {'background':'grey'} : {'background':'#e16428'}">İleri</button>
+                
+                </form>
+              </mat-step>
+              <mat-step>
+                  <ng-template matStepLabel><span style="color:white">Başarılı</span></ng-template>
+                  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+                    <div class="alert alert-success">Kayıt işleminiz başarıyla tamamlanmıştır.</div>
+                    <img src="./../../assets/check.png" style="width:300px;height:300px">
+                  </div>
+                
+                
+                <div>
+                  <button mat-button (click)="onSubmit()" class="mr-2" style="background:#e16428">Bitir</button>
+                  <button mat-button style="background:#e16428" (click)="onReset()">Sıfırla</button>
+                </div>
+              </mat-step>
+            </mat-horizontal-stepper>
+          
+  </form>
+      
+  
+ 
+
+  
+</div>
