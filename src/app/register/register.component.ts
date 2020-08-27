@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
   }
   onClose(){
     this.dailogRef.close()
+    console.log("deneme")
 
   }
   form1(){
