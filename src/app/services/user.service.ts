@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,9 @@ export class UserService {
 
   // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{6,}')
 readonly baseURI="http://localhost:51207/api/"
-image;
-formData;
-fileToUpload;
-progress;
-message;
-response:any={dbPath:''};
-defaultImage;
-userDetails;
 
-  constructor(private fb:FormBuilder) { }
+formData;
+  constructor(private fb:FormBuilder,private http:HttpClient) { }
   formModel=this.fb.group({
     name:['',Validators.required],
     surname:['',Validators.required],
@@ -57,6 +51,25 @@ userDetails;
     })
     
   }
+  login(formData){
+    return this.http.post(this.baseURI+"User/Login",formData)
+  }
+  register(){
+    var body={
+      Username:this.formModel.value.username,
+      Name:this.formModel.value.name,
+      Surname:this.formModel.value.surname,
+      Email:this.formModel.value.email,
+      PhoneNumber:this.formModel.value.phoneNumber,
+      Password:this.formModel.value.Passwords.password,
+      Address:this.formModel.value.address,
+      StoreType:this.formModel.value.storeType,
+      StorePhoneNumber:this.formModel.value.storePhoneNumber,
+      StoreAddress:this.formModel.value.storeAddress,
+      StoreName:this.formModel.value.storeName
+    }
+    return this.http.post(this.baseURI+"User/Register",body)
+  }
  
   initializeFormGroup(){
     this.formModel.setValue({
@@ -78,7 +91,7 @@ userDetails;
       email:'',
         
       })
-      this.image=null
+      
       
 
     

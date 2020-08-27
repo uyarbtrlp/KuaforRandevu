@@ -85,6 +85,7 @@
                   </div>
                   <button mat-button matStepperNext [disabled]="formone.invalid" [ngStyle]="formone.invalid? {'background':'grey'} : {'background':'#e16428'}">İleri</button>
                   
+                  
                 </form>
               </mat-step>
               <mat-step [stepControl]="secondFormGroup">
@@ -138,7 +139,8 @@
                     </div>
                 </div>
                 <button mat-button matStepperPrevious class="mr-2" [disabled]="formone.invalid" [ngStyle]="formone.invalid? {'background':'grey'} : {'background':'#e16428'}">Geri</button>
-                <button mat-button matStepperNext [disabled]="formtwo.invalid" [ngStyle]="formtwo.invalid? {'background':'grey'} : {'background':'#e16428'}">İleri</button>
+                <button mat-button style="background:#e16428" class="mr-2" (click)="onReset()">Sıfırla</button>
+                <button mat-button (click)="onSubmit()" [disabled]="formtwo.invalid" [ngStyle]="formtwo.invalid? {'background':'grey'} : {'background':'#e16428'}">Bitir</button>
                 
                 </form>
               </mat-step>
@@ -151,8 +153,8 @@
                 
                 
                 <div>
-                  <button mat-button (click)="onSubmit()" class="mr-2" style="background:#e16428">Bitir</button>
-                  <button mat-button style="background:#e16428" (click)="onReset()">Sıfırla</button>
+                  <button mat-button (click)="onEnd()" class="mr-2" style="background:#e16428">Son</button>
+                  
                 </div>
               </mat-step>
             </mat-horizontal-stepper>

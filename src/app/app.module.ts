@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
     MatStepperModule,
     FontAwesomeModule,
     MatSelectModule,
+    HttpClientModule,
     ShowHidePasswordModule
 
     

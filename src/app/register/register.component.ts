@@ -71,12 +71,9 @@ export class RegisterComponent implements OnInit {
     console.log(this.service.formModel.value);
   }
   form2(){
-    this.service.formModel.get("storeName").setValue(this.secondFormGroup.get("storeName").value)
-    this.service.formModel.get("storeAddress").setValue(this.secondFormGroup.get("storeAddress").value)
-    this.service.formModel.get("storePhoneNumber").setValue(this.secondFormGroup.get("storePhoneNumber").value)
-    this.service.formModel.get("storeType").setValue(this.secondFormGroup.get("storeType").value)
+    
     //console.log(this.secondFormGroup.value);
-    console.log(this.service.formModel.value);
+   
   }
   onReset(){
     this.stepper.reset();
@@ -85,10 +82,33 @@ export class RegisterComponent implements OnInit {
     this.formDirectiveTwo.resetForm();
     this.service.initializeFormGroup();
   }
-  onSubmit(){
+  onEnd(){
     this.dailogRef.close()
     this.service.formModel.reset();
     this.service.initializeFormGroup();
+  }
+  onSubmit(){
+    this.service.formModel.get("storeName").setValue(this.secondFormGroup.get("storeName").value)
+    this.service.formModel.get("storeAddress").setValue(this.secondFormGroup.get("storeAddress").value)
+    this.service.formModel.get("storePhoneNumber").setValue(this.secondFormGroup.get("storePhoneNumber").value)
+    this.service.formModel.get("storeType").setValue(this.secondFormGroup.get("storeType").value)
+    console.log(this.service.formModel.value);
+    this.service.register().subscribe((res:any)=>{
+      if(res.succeeded){
+        this.stepper.next()
+      }
+      else{
+        res.errors.forEach(element => {
+          console.log(element.description)
+        });
+      }
+
+      
+    },
+    err=>{
+      console.log(err)
+    })
+    
   }
 
 }
