@@ -33,6 +33,7 @@
     "fs": "0.0.1-security",
     "ngx-electron": "^2.2.0",
     "ngx-show-hide-password": "^2.3.0",
+    "ngx-toastr": "^13.0.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "rxjs": "~6.5.5",

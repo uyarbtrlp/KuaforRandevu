@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private dialog:MatDialog,private service:UserService) {
+  constructor(private dialog:MatDialog,private service:UserService,private toast:ToastrService) {
     /*const Store = window.require('electron-store');
    const store = new Store();
    console.log(store.get('x'));*/
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit {
       },
       err=>{
        
-        console.log(err);
+        this.toast.error(err.error.message,"Hata",{
+          timeOut: 5000,
+        })
 
         }
        

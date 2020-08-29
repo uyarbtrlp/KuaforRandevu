@@ -19,6 +19,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     FontAwesomeModule,
     MatSelectModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     ShowHidePasswordModule
 
     

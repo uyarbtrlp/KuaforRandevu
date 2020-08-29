@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import {UserService} from '../services/user.service'
 import { MatStepper } from '@angular/material/stepper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
 @ViewChild('formone') private formDirective: NgForm;
 @ViewChild('formtwo') private formDirectiveTwo: NgForm;
 
-  constructor(public dailogRef:MatDialogRef<RegisterComponent>,private _formBuilder: FormBuilder,public service:UserService) { }
+  constructor(public dailogRef:MatDialogRef<RegisterComponent>,private _formBuilder: FormBuilder,public service:UserService,private toast:ToastrService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -99,9 +100,33 @@ export class RegisterComponent implements OnInit {
       }
       else{
         res.errors.forEach(element => {
-          console.log(element.description)
-        });
+          if(element.code=="PasswordRequiresNonAlphanumeric"){
+            this.toast.error("Şifre en az bir adet simge içermelidir.","Hata")
+
+          }
+          else if(element.code=="PasswordRequiresLower"){
+            this.toast.error("Şifre en az bir adet küçük harf içermelidir.","Hata")
+          }
+          else if(element.code=="PasswordRequiresUpper"){
+            this.toast.error("Şifre en az bir adet büyük harf içermelidir.","Hata")
+          }
+          else if(element.code=="PasswordRequiresDigit"){
+            this.toast.error("Şifre en az bir adet sayı i çermelidir.","Hata")
+          }
+          else if(element.code=="PasswordTooShort"){
+            this.toast.error("Şifre en az 6 karakterden oluşmalıdır.","Hata")
+          }
+          else if(element.code=="DuplicateUserName"){
+            this.toast.error("Bu kullanıcı adı kullanılıyor.","Hata")
+          }
+          else if(element.code=="DuplicateEmail"){
+            this.toast.error("Bu email adresi kullanılıyor.","Hata")
+          }
+          
+        
       }
+        )
+    }
 
       
     },

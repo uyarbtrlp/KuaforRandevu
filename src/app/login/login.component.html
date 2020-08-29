@@ -7,12 +7,14 @@
                     <mat-label>Kullanıcı Adı</mat-label>
                     <input  #UserName="ngModel" name="UserName" matInput [(ngModel)]="formModel.UserName" required>
                 </mat-form-field>
+               <p style="margin-top:-18px;color:red" *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)">Bu alan boş bırakılamaz.</p>
                 
                 <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="password">
                     <mat-label>Şifre</mat-label>
                     <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required matInput type="password">
                 </mat-form-field>
-                <button mat-raised-button class="full-width button" style="background: #e16428;">Giriş</button>
+                <p style="margin-top:-18px;color:red" *ngIf="Password.invalid && (Password.dirty || Password.touched)">Bu alan boş bırakılamaz.</p>
+                <button mat-raised-button [disabled]="form.invalid"  [ngStyle]="form.invalid? {'background':'grey'} : {'background':'#e16428'}" class="full-width button">Giriş</button>
                 <p class="mt-3">Üyeliğiniz yok mu? Hemen <span (click)="registerWindow()" style="color:turquoise" >buradan</span> üye olun!</p>
             </form>
             </div>
