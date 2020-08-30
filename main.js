@@ -1,10 +1,9 @@
 const { app, BrowserWindow,screen,remote,Menu,Tray  } = require('electron')
 const Store = require('electron-store');
 const store = new Store();
-store.set('x', 'deneme');
 
 let win;
-number=1;
+number=store.get('token')
 height=0;
 windth=0;
 function createWindowIndex () {
@@ -54,6 +53,7 @@ function createWindowIndex () {
       nodeIntegration:true
     }}
     )
+    console.log(number)
     Menu.setApplicationMenu(null)
     win.maximize()
     win.show()
@@ -79,7 +79,7 @@ function createWindowIndex () {
 
     app.whenReady().then(()=>{
       
-      if(number==1){
+      if(number==null){
         height=600;
         width=1000;
         createWindowIndex()
@@ -100,6 +100,7 @@ function createWindowIndex () {
         } },
       ])
       tray.on("click",()=>{
+        win.maximize()
       win.show()
 
 

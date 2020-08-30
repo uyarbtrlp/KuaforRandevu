@@ -4,7 +4,8 @@ import { RegisterComponent } from '../register/register.component';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { Router } from '@angular/router';
+ let store:any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,10 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private dialog:MatDialog,private service:UserService,private toast:ToastrService) {
-    /*const Store = window.require('electron-store');
-   const store = new Store();
-   console.log(store.get('x'));*/
+  constructor(private dialog:MatDialog,private service:UserService,private toast:ToastrService,private router:Router) {
+    //const Store = window.require('electron-store');
+  //store = new Store();
    }
    formModel={
     UserName:"",
@@ -23,12 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('token')!=null){
+      this.router.navigateByUrl("/home")
+    }
   }
   onSignIn(form:NgForm){
     this.service.login(form.value).subscribe(
       (res:any)=>{
         
           localStorage.setItem('token',res.token);
+          //store.set('token',res.token)
+          this.router.navigateByUrl("/home")
         
         
 
