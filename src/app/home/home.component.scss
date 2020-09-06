@@ -1,17 +1,26 @@
 .example-sidenav{
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
+  position: fixed !important;
+  z-index: 1 !important;
+  top: 0 !important;
+  left: 0 !important;
   background:#303030;
   width: 250px;
   
 }
 .example-sidenav-content{
     background:#ACDBDF;
-    padding: 50px;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    min-height: 100vh;
+
 }
+.example-container{
+  
+  min-height: 100vh;
+}
+
 .user-image{
   border-radius: 50%;
   
@@ -22,4 +31,33 @@
 .name-surname{
   color:White;
   margin-bottom:0px;
+}
+.navigation{
+  padding-left: 80px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.nav-button{
+  padding: 15px !important;
+  border-radius: 50% !important;
+  transition: 0.15s !important
+}
+.nav-button:hover{
+  border-radius: 15px !important;
+  
+}
+.nav-selected{
+  width: 15px !important;height: 15px !important;
+  top:18px !important;visibility: hidden;
+  background:whitesmoke !important
+}
+ .mat-tooltip {
+  /* your own custom styles here */ 
+  /* e.g. */
+  font-size: 14px !important;
+}
+.mat-dialog-container{
+  background: #222222;
 }

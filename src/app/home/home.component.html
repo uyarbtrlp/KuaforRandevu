@@ -12,86 +12,43 @@
         
 
       </div>
+      <div class="navigation">
+        <div class="mb-3">
+          
+            <button mat-fab class="nav-selected mr-2"  [ngStyle]="{'visibility': (navText=='home' || navText=='homeIcon') ? 'visible' : 'hidden' }">
+             
+            </button>
+            <a mat-raised-button class="nav-button" routerLink="/home/customers"  id="home" (click)="navigate($event)" matTooltip="Anasayfa" matTooltipPosition="right" color="warn">
+              <mat-icon id="homeIcon">home</mat-icon>
+            </a>
+            
+         
+         
+        </div>
+        <div class="example-button-container mb-3">
+          <button mat-fab class="nav-selected mr-2" [ngStyle]="{'visibility': (navText=='x' || navText=='xIcon') ? 'visible' : 'hidden' }">
+             
+          </button>
+          <a mat-raised-button id="x" (click)="navigate($event)"  routerLink="/home/summary"  routerLinkActive="active" class="nav-button" color="warn" matTooltip="Hesap Özeti" matTooltipPosition="right">
+            <mat-icon id="xIcon">bookmark</mat-icon>
+          </a>
+        </div>
+        <div class="example-button-container">
+          <button mat-fab class="nav-selected mr-2">
+             
+          </button>
+          <a mat-raised-button (click)="areYouSure()"  routerLinkActive="active" class="nav-button" color="warn" matTooltip="Çıkış Yap" matTooltipPosition="right">
+            <mat-icon>power_settings_new</mat-icon>
+          </a>
+        </div>
+       
+      </div>
+      
 
     </mat-drawer>
   
     <div class="example-sidenav-content">
-        
-            <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
-      <p>asdasd</p>
+     <router-outlet></router-outlet>
 
         
       

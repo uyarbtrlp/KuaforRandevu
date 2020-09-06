@@ -1,0 +1,42 @@
+.example-card {
+  max-width: 330px;
+  background:#222222;
+  color:whitesmoke;
+}
+mat-card-subtitle{
+    color:whitesmoke;
+}
+::ng-deep .mat-menu-content{
+   background:#222222;
+   .mat-menu-item{
+       color:whitesmoke;
+       
+       
+       
+   }
+  
+}
+button:focus {
+    outline: none;
+}
+.done{
+    color:#4cff6d;
+}
+
+.delete{
+    color:red;
+}
+
+.update{
+    color:#59bfff
+}
+
+
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.context-icon{
+   
+}

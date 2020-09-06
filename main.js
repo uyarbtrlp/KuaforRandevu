@@ -49,9 +49,9 @@ function createWindowIndex () {
         skipTaskbar:true,
         show:false,
         webPreferences:{
-
-      nodeIntegration:true
-    }}
+          
+         nodeIntegration:true
+        }}
     )
     console.log(number)
     Menu.setApplicationMenu(null)
