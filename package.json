@@ -31,6 +31,7 @@
     "electron": "^9.2.0",
     "electron-store": "^6.0.0",
     "fs": "0.0.1-security",
+    "moment": "^2.27.0",
     "ngx-electron": "^2.2.0",
     "ngx-show-hide-password": "^2.3.0",
     "ngx-toastr": "^13.0.0",

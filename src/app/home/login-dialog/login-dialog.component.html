@@ -1,0 +1,35 @@
+<div class="container" style="display: flex">
+    <div class="row shadow-lg" style="background:#222222;padding:50px;border-radius: 5px;">
+        <div class="col-md-6">
+            <div class="inputs" class="my-auto">
+                <form class="form" #form="ngForm" (submit)="onSignIn(form)">
+                <mat-form-field class="full-width"  appearance="outline" floatLabel="always"  id="userName">
+                    <mat-label>Kullanıcı Adı</mat-label>
+                    <input  #UserName="ngModel" name="UserName" matInput [(ngModel)]="formModel.UserName" required>
+                </mat-form-field>
+               <p style="margin-top:-18px;color:red" *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)">Bu alan boş bırakılamaz.</p>
+                
+                <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="password">
+                    <mat-label>Şifre</mat-label>
+                    <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required matInput type="password">
+                </mat-form-field>
+                <p style="margin-top:-18px;color:red" *ngIf="Password.invalid && (Password.dirty || Password.touched)">Bu alan boş bırakılamaz.</p>
+                <button mat-raised-button [disabled]="form.invalid"  [ngStyle]="form.invalid? {'background':'grey'} : {'background':'#e16428'}" class="full-width button">Giriş</button>
+            </form>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="info ml-5" style="display: flex;justify-content: center;text-align: justify;">
+                <p style="line-height: 30px; word-wrap: break-word;">Bu uygulama ile müşterilerinizin randevularını deftere kaydetme sorununu ortadan kaldırıyoruz. Müşterilerinizin randevularını rahatlıkla
+                    bu uygulamaya kaydedip üzerinde değişiklik yapabilirsiniz. Ayrıca haftalık, aylık vb. gibi müşterileriniz üzerinden kazandığınız parayı görebilirsiniz.
+                </p>
+                
+            </div>
+            
+        </div>
+    </div>
+   
+
+    
+</div>

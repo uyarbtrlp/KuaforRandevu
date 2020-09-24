@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +55,27 @@ userInfo;
   login(formData){
     return this.http.post(this.baseURI+"User/Login",formData)
   }
+  loginSelect(formData){
+    return this.http.post(this.baseURI+"User/loginSelect",formData)
+  }
+  loginMore(formData){
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    return this.http.post(this.baseURI+"User/LoginMore",formData,{headers:tokenHeader})
+  }
+  getBaseUserProfile(){
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    return this.http.get(this.baseURI+"User/GetUserProfile",{headers:tokenHeader})
+  }
   getUserProfile(){
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+    return this.http.get(this.baseURI+"User/GetUserProfile",{headers:tokenHeader})
+  }
+  getLoggedUsers(){
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    return this.http.get(this.baseURI+"User/GetLoggedUsers",{headers:tokenHeader})
+  }
+  getUserProfileWithParameter(token){
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+token})
     return this.http.get(this.baseURI+"User/GetUserProfile",{headers:tokenHeader})
   }
   register(){

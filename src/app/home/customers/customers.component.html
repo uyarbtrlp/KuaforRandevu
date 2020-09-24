@@ -1,247 +1,53 @@
-<button mat-raised-button class="mb-3" color="primary" aria-label="Example icon button with a delete icon">
+<button mat-raised-button (click)="addCustomer()" class="mb-3" color="primary" aria-label="Example icon button with a delete icon">
     <mat-icon>add</mat-icon>
     Yeni Müşteri
   </button>
-<div class="row">
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
+  
+  <mat-form-field appearance="outline"   class="example-full-width ml-3">
+    <mat-label>Tarih Seç</mat-label>
+    <input matInput readonly [matDatepickerFilter]="myFilter" (dateChange)="dateChange()" [formControl]="date" (click)="picker.open()" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button (click)="showHour()" class="mb-3 ml-3" color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>query_builder</mat-icon>
+    Boş Saatleri Göster
+  </button>
+  <mat-form-field appearance="outline" class="example-full-width ml-3" >
+    <mat-label>Müşteri Ara</mat-label>
+    <input matInput [(ngModel)]="customerService.searchKey" (keyup)="onFilter()">
+    <button mat-icon-button mat-button matSuffix *ngIf="customerService.searchKey" (click)="onClear()">
+      <mat-icon style="color:black">clear</mat-icon>
+  </button>
+</mat-form-field >
+
+   <div class="card-deck" >
+    <mat-card class="example-card mr-3 mb-3" *ngFor="let customer of customerService.filteredCustomers">
+      <mat-card-header >
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title> {{customer.name}} {{customer.surname}}</mat-card-title>
+        <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="approveCustomer(customer)">
+              <mat-icon  class="done">done</mat-icon>
+              <span>Tamamla</span>
+            </button>
+          <button mat-menu-item (click)="updateCustomer(customer)" >
+            <mat-icon class="update">update</mat-icon>
+            <span>Güncelle</span>
+          </button>
+          <button mat-menu-item (click)="deleteCustomer(customer.id)">
+            <mat-icon class="delete">delete</mat-icon>
+            <span>Sil</span>
+          </button>
+          
+        </mat-menu>
+        <mat-card-subtitle>Geleceği Saat -> {{customer.hour}}</mat-card-subtitle>
+        <mat-card-subtitle>Geleceği Tarih -> {{customer.date}}</mat-card-subtitle>
+        <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  {{customer.transactions}} </mat-card-subtitle>
+        <mat-card-subtitle>Fiyat -> {{customer.price}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
     </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: unset;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    <div class="col-md-3 mb-4">
-        <mat-card class="example-card">
-            <mat-card-header >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title> Mahmut Emin Yıldırımoğulları</mat-card-title>
-              <button mat-icon-button class="context-icon" [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon  class="done">done</mat-icon>
-                    <span>Tamamla</span>
-                  </button>
-                <button mat-menu-item >
-                  <mat-icon class="update">update</mat-icon>
-                  <span>Güncelle</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon class="delete">delete</mat-icon>
-                  <span>Sil</span>
-                </button>
-                
-              </mat-menu>
-              <mat-card-subtitle>Geleceği Saat -> 10:00</mat-card-subtitle>
-              <mat-card-subtitle>Geleceği Tarih -> 06.09.2020</mat-card-subtitle>
-              <mat-card-subtitle style="word-wrap: break-word;">Yapılacak İşlemler->  saç, sakal, yıkama, keratin </mat-card-subtitle>
-              <mat-card-subtitle>Fiyat -> 60TL</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
-    </div>
-    
-   </div>

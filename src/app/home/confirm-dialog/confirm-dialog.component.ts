@@ -17,6 +17,7 @@ export class ConfirmDialogComponent implements OnInit {
     this.matRef.close(false)
   }
   logout(){
+    localStorage.removeItem('baseToken')
     localStorage.removeItem('token')
     this.router.navigate(["/login"])
   }

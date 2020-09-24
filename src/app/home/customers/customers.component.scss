@@ -1,7 +1,11 @@
 .example-card {
-  max-width: 330px;
+    width: 320px;
   background:#222222;
   color:whitesmoke;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 16px;
+  padding-right:0px;
 }
 mat-card-subtitle{
     color:whitesmoke;
@@ -9,7 +13,7 @@ mat-card-subtitle{
 ::ng-deep .mat-menu-content{
    background:#222222;
    .mat-menu-item{
-       color:whitesmoke;
+       color:whitesmoke !important;
        
        
        
@@ -30,13 +34,128 @@ button:focus {
 .update{
     color:#59bfff
 }
+::ng-deep .mat-button-focus-overlay {
+  display: none;
+}
 
 
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url('../../../assets/user.png');
   background-size: cover;
 }
 .context-icon{
    
 }
+@media only screen and (max-width:1118px){
+    .card-deck{
+        display: flex !important; justify-content: center !important;
+    }
+
+}
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: black;
+    // opacity: 1!important;
+  }
+  ::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+  }
+  
+  //mat-input focused color
+  :host ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: black;
+  }
+  
+  // mat-input error outline color
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: red!important;
+    opacity: 0.8!important;
+  }
+  :host ::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black!important;
+  }
+  :host ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black!important;
+  }
+  
+  // mat-input carent color
+  :host ::ng-deep .mat-input-element {
+    caret-color: black!important;
+  }
+  
+  // mat-input error carent color
+  ::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+    caret-color: red!important;
+  }
+  
+  // mat-label normal state style
+  :host ::ng-deep .mat-form-field-label {
+    color: black!important;
+    // color: $mainColor!important;
+  }
+  i{
+    cursor: pointer;
+    color:#4ECCA3
+  }
+  ::ng-deep .mat-select-panel{
+    background:#222222;
+  }
+  
+  
+  
+  
+  
+  ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: blue;
+  
+  }
+  ::ng-deep  .mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-underline {
+  background-color: #63961C !important;
+  }
+  :host ::ng-deep .mat-datepicker-toggle
+  { 
+    .mat-icon-button{
+    color: black ;
+
+}
+  }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // mat-label error style
+  :host ::ng-deep .mat-form-field.mat-form-field-invalid {
+    .mat-form-field-label {
+    color: red!important;
+  }
+  .mat-input-element{
+    color: red!important;
+  }
+  }
+  :host ::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: black;
+    }
+    .mat-form-field-label {
+        color: black;
+    }
+    .mat-form-field-underline {
+        background-color: slategray;
+    }
+    .mat-form-field-ripple {
+        background-color: slategray;
+    }
+    .mat-form-field-required-marker {
+        color: red;
+    }
+  }

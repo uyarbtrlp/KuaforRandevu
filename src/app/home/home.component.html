@@ -1,17 +1,65 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" opened mode="side">
       <div class="user-information">
-        <div class="media">
+        <div class="media media-hover" [matMenuTriggerFor]="menu" >
+        
           <img src="./../../assets/user.png" class="user-image" width="100px" height="100px">
+          
           <div class="media-body ml-3 mt-4">
-            <p class="mt-0 name-surname" >{{service.userInfo?.name}} {{service.userInfo?.surname}}</p>
+            
+            <p class="mt-0 name-surname" style="display: flex;" >{{service.userInfo?.name}} {{service.userInfo?.surname}} </p>
+            
             <p class="mt-0" class="username"style="color:white">@{{service.userInfo?.userName}}</p>
             
           </div>
+          <mat-icon class="mt-4"  style="color:white">expand_more</mat-icon>
         </div>
         
 
       </div>
+      <mat-menu #menu="matMenu" class="menu ">
+        <button mat-menu-item class="item" (click)="loginSelect(baseUser.userName)" [disabled]="service.userInfo?.userName==baseUser?.userName" >
+          
+            
+          <div class="mt-2">
+            <div class="media">
+            
+              <img src="./../../assets/user.png" class="user-image" width="75px" height="75px">
+              <div class="media-body ml-3">
+                
+                <p class="mt-0 name-surname" style="display: flex;" >{{baseUser?.name}} {{baseUser?.surname}}</p>
+            
+            <p class="mt-0" class="username-menu"style="color:white">@{{baseUser?.userName}}</p>
+                
+              </div>
+            </div>
+            
+    
+          </div>
+            
+          </button>
+          <button mat-menu-item class="item" *ngFor="let loggedUser of loggedUsers" (click)="loginSelect(loggedUser.username)" [disabled]="service.userInfo?.userName==loggedUser.username">
+          
+            
+            <div class="mt-2">
+              <div class="media">
+              
+                <img src="./../../assets/user.png" class="user-image" width="75px" height="75px">
+                <div class="media-body ml-3">
+                  
+                  <p class="mt-0 name-surname" style="display: flex;" >{{loggedUser?.name}} {{loggedUser?.surname}}</p>
+              
+              <p class="mt-0" class="username-menu"style="color:white">@{{loggedUser?.username}}</p>
+                  
+                </div>
+              </div>
+              
+      
+            </div>
+              
+            </button>
+        <button mat-menu-item (click)="login()" class="">Var olan bir hesap ekle</button>
+      </mat-menu> 
       <div class="navigation">
         <div class="mb-3">
           

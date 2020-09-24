@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { LoginComponent } from '../login/login.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,18 @@ export class HomeComponent implements OnInit {
   selectedCss=false;
   navText="home";
   showFiller = false;
+  loggedUsers;
+  selectedUsername;
+  body={userName:""}
+  baseUser;
+  selectedUrl;
 
   constructor(public service:UserService,public http:HttpClient,private router:Router,private dialog:MatDialog) { 
     
   }
 
   ngOnInit(): void {
+    this.selectedUrl=this.router.url
     console.log("loading")
     this.service.getUserProfile().subscribe(data => {
       this.service.userInfo=data;
@@ -29,11 +37,50 @@ export class HomeComponent implements OnInit {
   err=>{
     console.log(err)
   })
+  this.service.getLoggedUsers().subscribe(x=>
+    this.loggedUsers=x
+    
+    )
+    err=>{
+    console.log(err);
+      
+    }
+    this.service.getBaseUserProfile().subscribe(data => {
+      this.baseUser=data;
+      console.log("loaded")
+  },
+  err=>{
+    console.log(err)
+  })
+  
     
   }
+  
   navigate(event){
     var target = event.target
     this.navText=target.id;
+
+  }
+  loginSelect(username){
+    this.selectedUsername=username;
+    this.body.userName=username
+    console.log(this.service.userInfo.userName)
+    this.service.loginSelect(this.body).subscribe((res:any)=>{
+      localStorage.setItem("token",res.token)
+      this.router.navigateByUrl("/login")
+    }
+    ,err=>{
+      console.log(err)
+    })
+
+  }
+  login(){
+    const config=new MatDialogConfig();
+    config.disableClose=false;
+    config.autoFocus=false;
+    config.width="auto"
+    config.hasBackdrop=true
+    this.dialog.open(LoginDialogComponent,config);
 
   }
   areYouSure(){

@@ -1,0 +1,18 @@
+<mat-toolbar>
+    <div class="newProduct">
+
+     
+        <span>Saatler</span>
+        <button mat-stroked-button tabindex="-1" (click)="onClose()"><mat-icon>close</mat-icon></button>
+       </div>
+   
+
+</mat-toolbar>
+
+
+    <div class="row">
+        <div class="col-md-3 col-lg-2" *ngFor="let hour of customerService.hours">
+            <p style="color:white" >{{hour.hour}}<mat-icon *ngIf="hour.disabled" style="color:red" class="mt-2 icon">clear</mat-icon><mat-icon style="color:#4cff6d;" *ngIf="!hour.disabled" class="mt-2 icon">done</mat-icon></p>
+        </div>
+    </div>
+

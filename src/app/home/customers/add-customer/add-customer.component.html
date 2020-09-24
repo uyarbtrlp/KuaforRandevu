@@ -1,0 +1,84 @@
+<mat-toolbar>
+    <div class="newProduct">
+
+     
+        <span>Yeni Müşteri</span>
+        <button mat-stroked-button tabindex="-1" (click)="onClose()"><mat-icon>close</mat-icon></button>
+       </div>
+   
+
+</mat-toolbar>
+     
+ <form  [formGroup]="customerService.formModel" (submit)="onSubmit()" class="example-form">
+     <div class="row">
+         <div class="col-md-6">
+            
+              
+            <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>İsim</mat-label>
+                <input formControlName="Name" name="Name" #Name  required matInput>
+                
+            </mat-form-field >
+            <p style="margin-top:-18px;color:red"*ngIf="customerService.formModel.get('Name').errors?.empty && customerService.formModel.get('Name').touched">Bu alan boşluk karakteri ile başlayamaz.</p>
+            <p style="margin-top:-18px;color:red" *ngIf="customerService.formModel.get('Name').touched && customerService.formModel.get('Name').errors?.required">Bu alan boş bırakılamaz.</p>
+            <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>Soyisim</mat-label>
+                <input formControlName="Surname" name="Surname" #Surname  required matInput>
+                
+            </mat-form-field >
+            <p style="margin-top:-18px;color:red" *ngIf="customerService.formModel.get('Surname').touched && customerService.formModel.get('Surname').errors?.required">Bu alan boş bırakılamaz.</p>
+            <p style="margin-top:-18px;color:red " *ngIf="customerService.formModel.get('Surname').errors?.empty && customerService.formModel.get('Surname').touched">Bu alan boşluk karakteri ile başlayamaz.</p>
+            <mat-form-field appearance="outline"  class="example-full-width">
+                <mat-label>Tarih</mat-label>
+                <input matInput readonly formControlName="Date" name="Date" #Date required [matDatepickerFilter]="myFilter" (click)="picker.open()" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <p style="margin-top:-18px;color:red" *ngIf="customerService.formModel.get('Date').touched && customerService.formModel.get('Date').errors?.required">Bu alan boş bırakılamaz.</p>
+           
+
+         </div>
+         <div class="col-md-6">
+            
+            <mat-form-field appearance="outline" class="example-full-width" (click)="checkTime()">
+                <mat-label>Saat</mat-label>
+                <mat-select panelClass="testClass" disableOptionCentering  formControlName="Hour" name="Hour"  #Hour  required>
+                  <mat-option *ngFor="let hour of customerService.hours" [disabled]="hour.disabled" [value]="hour.hour" >
+                    {{hour.hour}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p style="margin-top:-18px;color:red" *ngIf="customerService.formModel.get('Hour').touched && customerService.formModel.get('Hour').errors?.required">Bu alan boş bırakılamaz.</p>
+            <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>Yapılacak İşlemler</mat-label>
+                <input formControlName="Transactions" name="Transactions" #Transactions  matInput>
+                
+            </mat-form-field >
+            <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>Fiyat</mat-label>
+                <input formControlName="Price" name="Price" #Price type="number"  matInput>
+                
+            </mat-form-field >
+           
+
+         </div>
+     </div>
+     <div style="display:flex;justify-content: center;">
+        <button type="submit" style="border-radius: 20px;" color="primary" [ngClass]="(!customerService.formModel.valid || !customerService.formModel.touched) ? 'disabled' : ''" [disabled]="!customerService.formModel.valid || !customerService.formModel.touched" class="mr-2"  mat-raised-button>Ekle
+
+        </button>
+        <button type="button" style="border-radius: 20px;" color="warn" (click)="onClear()" mat-raised-button>Sil
+    
+        </button>
+        
+    </div>
+    
+    
+   
+      
+      
+    
+   
+    
+    
+</form> 

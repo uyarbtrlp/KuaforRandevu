@@ -1,0 +1,13 @@
+<div class="dialog" >
+    <div style="display: flex; justify-content: center;">
+        <p class="ml-3">Müşteriyi silmek istediğinizden emin misiniz?</p>
+    <button style="top:-8px"  mat-icon-button (click)="onClose()"><mat-icon>close</mat-icon></button>
+    </div>
+    
+    <div class="buttons example-full-width" style="display: flex;justify-content: center;">
+        <button  mat-flat-button class="mr-2" (click)="delete()" color="primary" [mat-dialog-close]="true">Evet</button>
+    <button   mat-flat-button color="warn" [mat-dialog-close]="false">Hayır</button>
+
+    </div>
+    
+</div>

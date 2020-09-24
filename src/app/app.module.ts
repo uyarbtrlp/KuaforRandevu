@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -28,6 +29,12 @@ import { HomeComponent } from './home/home.component';
 import { CustomersComponent } from './home/customers/customers.component';
 import { SummaryComponent } from './home/summary/summary.component';
 import { ConfirmDialogComponent } from './home/confirm-dialog/confirm-dialog.component';
+import { AddCustomerComponent } from './home/customers/add-customer/add-customer.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { UpdateCustomerComponent } from './home/customers//update-customer/update-customer.component';
+import { ConfirmDeleteComponent } from './home/customers/confirm-delete/confirm-delete.component';
+import { LoginDialogComponent } from './home/login-dialog/login-dialog.component';
+import { ShowHourComponent } from './home/customers/show-hour/show-hour.component';
 
 
 
@@ -40,6 +47,11 @@ import { ConfirmDialogComponent } from './home/confirm-dialog/confirm-dialog.com
     CustomersComponent,
     SummaryComponent,
     ConfirmDialogComponent,
+    AddCustomerComponent,
+    UpdateCustomerComponent,
+    ConfirmDeleteComponent,
+    LoginDialogComponent,
+    ShowHourComponent,
 
   ],
   imports: [
@@ -59,7 +71,9 @@ import { ConfirmDialogComponent } from './home/confirm-dialog/confirm-dialog.com
     FontAwesomeModule,
     MatSelectModule,
     MatTooltipModule,
+    MatDatepickerModule,
     MatCardModule,
+    MatNativeDateModule,
     MatMenuModule,
     HttpClientModule,
     ToastrModule.forRoot(),
@@ -69,7 +83,7 @@ import { ConfirmDialogComponent } from './home/confirm-dialog/confirm-dialog.com
 
     
   ],
-  providers: [],
+  providers: [MatDatepickerModule,{ provide: MAT_DATE_LOCALE, useValue: 'tr-tr' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
