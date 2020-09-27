@@ -18,6 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ import { UpdateCustomerComponent } from './home/customers//update-customer/updat
 import { ConfirmDeleteComponent } from './home/customers/confirm-delete/confirm-delete.component';
 import { LoginDialogComponent } from './home/login-dialog/login-dialog.component';
 import { ShowHourComponent } from './home/customers/show-hour/show-hour.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -76,6 +78,8 @@ import { ShowHourComponent } from './home/customers/show-hour/show-hour.componen
     MatNativeDateModule,
     MatMenuModule,
     HttpClientModule,
+    MatTableModule,
+    MatSortModule,
     ToastrModule.forRoot(),
     ShowHidePasswordModule,
     MatSidenavModule

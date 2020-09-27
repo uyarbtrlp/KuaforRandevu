@@ -14,8 +14,11 @@ export class CustomerService {
   body={
     Date:''
 
+  }
+  approvedBody={
+    Date:''
   } 
-  filteredCustomers:any[]
+  filteredCustomers:any[]=[]
   searchKey;
   
   hours: any[] = [{hour:"08:00",disabled:false},{hour:"08:15",disabled:false},{hour:"08:30",disabled:false}
@@ -90,7 +93,7 @@ export class CustomerService {
       Date:this.pipe.transform(this.formModel.value.Date,"dd.MM.yyyy"),
       Hour:this.formModel.value.Hour,
       Transactions:this.formModel.value.Transactions,
-      Price:this.formModel.value.Price,
+      Price:""+this.formModel.value.Price,
     }
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.post(this.baseURI+"Customers/postCustomer",body,{headers:tokenHeader})
@@ -138,6 +141,11 @@ getCustomersWithParameter(body){
   var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   let params = new HttpParams().set("date",body.Date) //Create new HttpParams
     return this.http.get(this.baseURI+"Customers/getCustomers",{headers:tokenHeader,params:params})
+}
+getApprovedCustomers(approvedBody){
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  let params = new HttpParams().set("date",approvedBody.Date) //Create new HttpParams
+    return this.http.get(this.baseURI+"Customers/getApprovedCustomers",{headers:tokenHeader,params:params})
 }
 populateForm(customer){
   let array=customer.date.split('.');

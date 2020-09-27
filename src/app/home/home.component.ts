@@ -15,20 +15,26 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 })
 export class HomeComponent implements OnInit {
   selectedCss=false;
-  navText="home";
+  navText="";
   showFiller = false;
   loggedUsers;
   selectedUsername;
   body={userName:""}
   baseUser;
-  selectedUrl;
+  store;
 
   constructor(public service:UserService,public http:HttpClient,private router:Router,private dialog:MatDialog) { 
-    
+    const Store = window.require('electron-store');
+     this.store = new Store();
   }
 
   ngOnInit(): void {
-    this.selectedUrl=this.router.url
+    if(this.router.url=="/home/summary"){
+      this.navText=document.getElementById("x").id
+    }
+    else if(this.router.url=="/home/customers"){
+      this.navText=document.getElementById("home").id
+    }
     console.log("loading")
     this.service.getUserProfile().subscribe(data => {
       this.service.userInfo=data;
@@ -67,6 +73,7 @@ export class HomeComponent implements OnInit {
     console.log(this.service.userInfo.userName)
     this.service.loginSelect(this.body).subscribe((res:any)=>{
       localStorage.setItem("token",res.token)
+      this.store.set('token',res.token)
       this.router.navigateByUrl("/login")
     }
     ,err=>{

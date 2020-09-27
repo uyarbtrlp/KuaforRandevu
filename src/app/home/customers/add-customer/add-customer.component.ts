@@ -76,9 +76,10 @@ export class AddCustomerComponent implements OnInit {
         this.customerService.initializeFormGroup();
         this.dailogRef.close();
       this.toastService.success("Müşteri başarıyla eklendi.","Başarılı")
-      this.customerService.filteredCustomers=this.customerService.customers;
+      this.customerService.filteredCustomers=this.customerService.customers.filter(x=>x.date==this.customerService.body.Date);
     },
     err=>{
+      console.log(err)
       this.toastService.error("Müşteri eklenemedi.","Başarısız");
     })
   }

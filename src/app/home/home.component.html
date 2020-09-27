@@ -74,7 +74,7 @@
          
         </div>
         <div class="example-button-container mb-3">
-          <button mat-fab class="nav-selected mr-2" [ngStyle]="{'visibility': (navText=='x' || navText=='xIcon') ? 'visible' : 'hidden' }">
+          <button mat-fab class="nav-selected mr-2" [ngStyle]="{'visibility': ( navText=='x' || navText=='xIcon') ? 'visible' : 'hidden' }">
              
           </button>
           <a mat-raised-button id="x" (click)="navigate($event)"  routerLink="/home/summary"  routerLinkActive="active" class="nav-button" color="warn" matTooltip="Hesap Özeti" matTooltipPosition="right">

@@ -1,1 +1,144 @@
-<p>summary works!</p>
+<mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Tarih Aralığı Seç</mat-label>
+    <mat-select panelClass="testClass" disableOptionCentering [(ngModel)]="selectedDate" (selectionChange)="onSelectionChange()">
+      <mat-option value="Son 1 hafta" style="color:white" >Son 1 hafta</mat-option>
+      <mat-option value="Son 1 ay" style="color:white" >Son 1 ay</mat-option>
+      <mat-option value="Son 3 ay" style="color:white" >Son 3 ay</mat-option>
+      <mat-option value="Son 6 ay" style="color:white" >Son 6 ay</mat-option>
+      <mat-option value="Son 1 yıl" style="color:white" >Son 1 yıl</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="example-full-width ml-3" >
+    <mat-label>Müşteri Ara</mat-label>
+    <input matInput [(ngModel)]="searchKey" (keyup)="onFilter()">
+    <button mat-icon-button mat-button matSuffix *ngIf="searchKey" (click)="onClear()">
+      <mat-icon style="color:black">clear</mat-icon>
+  </button>
+</mat-form-field >
+  <div class="alert alert-danger" *ngIf="!isSelectedDate">
+    Lütfen geçmiş müşterileriniz görüntülemek için bir tarih aralığı seçiniz.
+  </div>
+  <div class="container" *ngIf="isSelectedDate">
+    <mat-card class="example-card shadow-lg" style="background-color: #222222;">
+        <mat-card-content style="color: white;font-size: 15px;">
+   
+            {{selectedDate}}da {{customerCount}} adet müşteri aldınız. Bu müşterilerden kazancınız {{priceTotal}} TL.
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="isShowDetail=!isShowDetail" style="background-color: #f44336;color: white;">Detayları Gör</button>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+
+  <div class="mat-elevation-z8 mt-4" [hidden]="((!isSelectedDate || isTableHasData) || !isShowDetail)">
+    <mat-table  [dataSource]="listData" matSort>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>İsim</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Soyisim</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.surname}}</mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Tarih</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.date | date:'dd.MM.yyyy'}}</mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="hour">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Saat</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.hour}}</mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="transactions">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Yapılan İşemler</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.transactions}}</mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Fiyat</mat-header-cell>
+        <mat-cell *matCellDef="let element"><p *ngIf="element.price==''">0 </p> <p *ngIf="element.price!=''">{{element.price}} </p> </mat-cell>
+
+    </ng-container>
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+
+                Müşteriler yükleniyor...
+            
+            </mat-footer-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+
+                Aradığınız müşteri bulunamadı...
+            
+            </mat-footer-cell>
+
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row;columns:displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+
+    </mat-table>
+  
+</div>
+<div class="mat-elevation-z8 mt-4" *ngIf="isTableHasData">
+  <mat-table  [dataSource]="listData" matSort>
+      <div matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>İsim</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+
+      </div>
+      <ng-container matColumnDef="surname">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Soyisim</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.surname}}</mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Tarih</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.date | date:'dd.MM.yyyy'}}</mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="hour">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Saat</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.hour}}</mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="transactions">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Yapılan İşemler</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.transactions}}</mat-cell>
+
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Fiyat</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.price}} </mat-cell>
+
+  </ng-container>
+      <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+
+              Müşteriler yükleniyor...
+          
+          </mat-footer-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+
+              Aradığınız müşteri bulunamadı...
+          
+          </mat-footer-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row;columns:displayedColumns;"></mat-row>
+      <mat-footer-row *matFooterRowDef="['noData']" ></mat-footer-row>
+
+  </mat-table>
+
+</div>

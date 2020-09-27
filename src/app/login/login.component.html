@@ -11,7 +11,8 @@
                 
                 <mat-form-field class="full-width" appearance="outline" floatLabel="always" id="password">
                     <mat-label>Şifre</mat-label>
-                    <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required matInput type="password">
+                    <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required matInput type="password" id="password" showHideInput>
+                    <i matSuffix class="material-icons" showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
                 </mat-form-field>
                 <p style="margin-top:-18px;color:red" *ngIf="Password.invalid && (Password.dirty || Password.touched)">Bu alan boş bırakılamaz.</p>
                 <button mat-raised-button [disabled]="form.invalid"  [ngStyle]="form.invalid? {'background':'grey'} : {'background':'#e16428'}" class="full-width button">Giriş</button>

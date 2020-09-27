@@ -43,7 +43,7 @@
             <mat-form-field appearance="outline" class="example-full-width" (click)="checkTime()">
                 <mat-label>Saat</mat-label>
                 <mat-select panelClass="testClass" disableOptionCentering  formControlName="Hour" name="Hour"  #Hour  required>
-                  <mat-option *ngFor="let hour of customerService.hours" [disabled]="hour.disabled" [value]="hour.hour" >
+                  <mat-option *ngFor="let hour of customerService.hours" style="color:white" [disabled]="hour.disabled" [value]="hour.hour" >
                     {{hour.hour}}
                   </mat-option>
                 </mat-select>
