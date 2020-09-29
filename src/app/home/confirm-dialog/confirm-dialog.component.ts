@@ -8,8 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent implements OnInit {
-
-  constructor(private matRef:MatDialogRef<ConfirmDialogComponent>,private router:Router) { }
+store
+  constructor(private matRef:MatDialogRef<ConfirmDialogComponent>,private router:Router) { 
+    const Store = window.require('electron-store');
+     this.store = new Store();
+  }
 
   ngOnInit(): void {
   }
@@ -19,6 +22,8 @@ export class ConfirmDialogComponent implements OnInit {
   logout(){
     localStorage.removeItem('baseToken')
     localStorage.removeItem('token')
+    this.store.delete('token')
+    this.store.delete('baseToken')
     this.router.navigate(["/login"])
   }
 

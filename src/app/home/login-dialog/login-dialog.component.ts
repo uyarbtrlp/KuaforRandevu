@@ -11,10 +11,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login-dialog.component.scss']
 })
 export class LoginDialogComponent implements OnInit {
-
+store
   constructor(private dialog:MatDialog,private service:UserService,private toast:ToastrService,private router:Router,public dailogRef:MatDialogRef<LoginDialogComponent>) {
-    //const Store = window.require('electron-store');
-  //store = new Store();
+    const Store = window.require('electron-store');
+  this.store = new Store();
    }
    formModel={
     UserName:"",
@@ -36,6 +36,7 @@ export class LoginDialogComponent implements OnInit {
           else{
             this.dailogRef.close();
           localStorage.setItem('token',res.token);
+          this.store.set('token',res.token)
           //store.set('token',res.token)
         this.router.navigateByUrl("/login")
 

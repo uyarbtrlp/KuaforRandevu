@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('baseToken',res.token)
           localStorage.setItem('token',res.token);
           store.set('token',res.token)
+          store.set('baseToken',res.token)
           this.router.navigateByUrl("/home")
         
         

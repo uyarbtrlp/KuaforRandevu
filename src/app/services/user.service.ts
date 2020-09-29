@@ -9,10 +9,13 @@ export class UserService {
 
   // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{6,}')
 readonly baseURI="http://localhost:51207/api/"
-
+store;
 formData;
 userInfo;
-  constructor(private fb:FormBuilder,private http:HttpClient) { }
+  constructor(private fb:FormBuilder,private http:HttpClient) {
+    const Store = window.require('electron-store');
+     this.store = new Store();
+   }
   formModel=this.fb.group({
     name:['',Validators.required],
     surname:['',Validators.required],
@@ -59,19 +62,23 @@ userInfo;
     return this.http.post(this.baseURI+"User/loginSelect",formData)
   }
   loginMore(formData){
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('baseToken')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
     return this.http.post(this.baseURI+"User/LoginMore",formData,{headers:tokenHeader})
   }
   getBaseUserProfile(){
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('baseToken')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
     return this.http.get(this.baseURI+"User/GetUserProfile",{headers:tokenHeader})
   }
   getUserProfile(){
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(this.baseURI+"User/GetUserProfile",{headers:tokenHeader})
   }
   getLoggedUsers(){
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('baseToken')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('baseToken')})
     return this.http.get(this.baseURI+"User/GetLoggedUsers",{headers:tokenHeader})
   }
   getUserProfileWithParameter(token){

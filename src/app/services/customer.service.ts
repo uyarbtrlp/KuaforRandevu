@@ -20,6 +20,7 @@ export class CustomerService {
   } 
   filteredCustomers:any[]=[]
   searchKey;
+  store
   
   hours: any[] = [{hour:"08:00",disabled:false},{hour:"08:15",disabled:false},{hour:"08:30",disabled:false}
   ,{hour:"08:45",disabled:false},{hour:"09:00",disabled:false},{hour:"09:15",disabled:false}
@@ -45,7 +46,8 @@ export class CustomerService {
   hours2;
   constructor(private fb:FormBuilder,private http:HttpClient) { 
 
-
+    const Store = window.require('electron-store');
+    this.store = new Store();
 
 
   }
@@ -95,7 +97,8 @@ export class CustomerService {
       Transactions:this.formModel.value.Transactions,
       Price:""+this.formModel.value.Price,
     }
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.post(this.baseURI+"Customers/postCustomer",body,{headers:tokenHeader})
 
 
@@ -111,7 +114,8 @@ approveCustomer(){
     Price:this.formModel.value.Price,
     id:this.id
   }
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   return this.http.post(this.baseURI+"Customers/approveCustomer",body,{headers:tokenHeader})
 
 
@@ -134,16 +138,19 @@ updateCustomer(){
   return this.http.put(this.baseURI+"Customers/updateCustomer",body)
 }
 getCustomers(){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(this.baseURI+"Customers/getCustomers",{headers:tokenHeader})
 }
 getCustomersWithParameter(body){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   let params = new HttpParams().set("date",body.Date) //Create new HttpParams
     return this.http.get(this.baseURI+"Customers/getCustomers",{headers:tokenHeader,params:params})
 }
 getApprovedCustomers(approvedBody){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   let params = new HttpParams().set("date",approvedBody.Date) //Create new HttpParams
     return this.http.get(this.baseURI+"Customers/getApprovedCustomers",{headers:tokenHeader,params:params})
 }
