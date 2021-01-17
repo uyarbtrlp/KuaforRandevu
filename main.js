@@ -35,14 +35,10 @@ function createWindowIndex () {
       }
     })
     // and load the index.html of the app.
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    win.loadFile('dist/KuaforRandevu/index.html')
   
     // Open the DevTools.
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
   }
   function loggedWindow(){
     win = new BrowserWindow(
@@ -72,7 +68,6 @@ function createWindowIndex () {
     })
     // and load the index.html of the app.
     win.loadFile('dist/KuaforRandevu/index.html')
-  
     // Open the DevTools.
     //win.webContents.openDevTools()
   }

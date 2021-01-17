@@ -64,6 +64,11 @@
         <mat-cell *matCellDef="let element"><p *ngIf="element.price==''">0 </p> <p *ngIf="element.price!=''">{{element.price}} </p> </mat-cell>
 
     </ng-container>
+    <ng-container matColumnDef="paymentChoice">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Ödeme Şekli</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.paymentChoice}}</mat-cell>
+
+    </ng-container>
         <ng-container matColumnDef="loading">
             <mat-footer-cell *matFooterCellDef colspan="6">
 
@@ -119,6 +124,11 @@
       <mat-cell *matCellDef="let element">{{element.price}} </mat-cell>
 
   </ng-container>
+  <ng-container matColumnDef="paymentChoice">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Ödeme Şekli</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.paymentChoice}} </mat-cell>
+
+</ng-container>
       <ng-container matColumnDef="loading">
           <mat-footer-cell *matFooterCellDef colspan="6">
 

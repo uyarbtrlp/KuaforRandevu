@@ -15,7 +15,7 @@ listData:MatTableDataSource<any>
 customerCount=0;
 priceTotal=0;
 isShowDetail=false
-displayedColumns:string[]=['name','surname','date','hour','transactions','price']
+displayedColumns:string[]=['name','surname','date','hour','transactions','price','paymentChoice']
 isSelectedDate=false;
 isTableHasData=false
 filteredData:MatTableDataSource<any>;

@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
   store;
 
   constructor(public service:UserService,public http:HttpClient,private router:Router,private dialog:MatDialog) { 
-    const Store = window.require('electron-store');
-     this.store = new Store();
+    //const Store = window.require('electron-store');
+     //this.store = new Store();
   }
 
   ngOnInit(): void {

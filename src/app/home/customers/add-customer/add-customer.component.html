@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar style="background:#222222">
     <div class="newProduct">
 
      
@@ -35,7 +35,15 @@
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <p style="margin-top:-18px;color:red" *ngIf="customerService.formModel.get('Date').touched && customerService.formModel.get('Date').errors?.required">Bu alan boş bırakılamaz.</p>
-           
+              <mat-form-field appearance="outline" class="example-full-width" (click)="checkTime()">
+                <mat-label>Ödeme Şekli</mat-label>
+                <mat-select panelClass="testClass" disableOptionCentering  formControlName="PaymentChoice" name="PaymentChoice"  #Hour >
+                  <mat-option *ngFor="let choice of customerService.paymentChoice" style="color:white"  [value]="choice.type" >
+                    {{choice.type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
 
          </div>
          <div class="col-md-6">

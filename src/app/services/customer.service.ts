@@ -44,10 +44,11 @@ export class CustomerService {
   ,{hour:"22:00",disabled:false},{hour:"22:15",disabled:false},{hour:"22:30",disabled:false}
   ];
   hours2;
+  paymentChoice:any[]=[{type:"Kredi Kartı"},{type:"Borç"}, {type:"Nakit"}]
   constructor(private fb:FormBuilder,private http:HttpClient) { 
 
-    const Store = window.require('electron-store');
-    this.store = new Store();
+    //const Store = window.require('electron-store');
+    //this.store = new Store();
 
 
   }
@@ -58,6 +59,7 @@ export class CustomerService {
     Hour:['',Validators.required],
     Transactions:[''],
     Price:[''],
+    PaymentChoice:['']
 
  
    
@@ -96,9 +98,10 @@ export class CustomerService {
       Hour:this.formModel.value.Hour,
       Transactions:this.formModel.value.Transactions,
       Price:""+this.formModel.value.Price,
+      PaymentChoice:this.formModel.value.PaymentChoice
     }
-    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
-    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+    //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+    var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.post(this.baseURI+"Customers/postCustomer",body,{headers:tokenHeader})
 
 
@@ -112,10 +115,11 @@ approveCustomer(){
     Hour:this.formModel.value.Hour,
     Transactions:this.formModel.value.Transactions,
     Price:this.formModel.value.Price,
-    id:this.id
+    id:this.id,
+    PaymentChoice:this.formModel.value.PaymentChoice
   }
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
-  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   return this.http.post(this.baseURI+"Customers/approveCustomer",body,{headers:tokenHeader})
 
 
@@ -134,23 +138,24 @@ updateCustomer(){
     Transactions:this.formModel.value.Transactions,
     Price:this.formModel.value.Price,
     id:this.id,
+    PaymentChoice:this.formModel.value.PaymentChoice
   }
   return this.http.put(this.baseURI+"Customers/updateCustomer",body)
 }
 getCustomers(){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
-  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(this.baseURI+"Customers/getCustomers",{headers:tokenHeader})
 }
 getCustomersWithParameter(body){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
-  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   let params = new HttpParams().set("date",body.Date) //Create new HttpParams
     return this.http.get(this.baseURI+"Customers/getCustomers",{headers:tokenHeader,params:params})
 }
 getApprovedCustomers(approvedBody){
-  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
-  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+  //var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+this.store.get('token')})
+  var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   let params = new HttpParams().set("date",approvedBody.Date) //Create new HttpParams
     return this.http.get(this.baseURI+"Customers/getApprovedCustomers",{headers:tokenHeader,params:params})
 }
@@ -163,6 +168,7 @@ populateForm(customer){
     Hour:customer.hour,
     Transactions:customer.transactions,
     Price:customer.price,
+    PaymentChoice:customer.paymentChoice
   })
   this.id=customer.id
 }
@@ -175,7 +181,8 @@ initializeFormGroup(){
     Date:'',
     Hour:'',
     Transactions:'',
-    Price:''
+    Price:'',
+    PaymentChoice:''
     })
 
   

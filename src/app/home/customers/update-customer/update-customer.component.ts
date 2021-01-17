@@ -66,6 +66,7 @@ export class UpdateCustomerComponent implements OnInit {
           x.hour=res.hour;
           x.transactions=res.transactions;
           x.price=res.price;
+          x.paymentChoice=res.paymentChoice
         }
       })
 

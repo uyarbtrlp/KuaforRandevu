@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private dialog:MatDialog,private service:UserService,private toast:ToastrService,private router:Router) {
-    const Store = window.require('electron-store');
-     store = new Store();
+    //const Store = window.require('electron-store');
+     //store = new Store();
    }
    formModel={
     UserName:"",
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
       (res:any)=>{
           localStorage.setItem('baseToken',res.token)
           localStorage.setItem('token',res.token);
-          store.set('token',res.token)
-          store.set('baseToken',res.token)
+          //store.set('token',res.token)
+          //store.set('baseToken',res.token)
           this.router.navigateByUrl("/home")
         
         

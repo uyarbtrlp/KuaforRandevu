@@ -47,6 +47,7 @@ export class AddCustomerComponent implements OnInit {
       Hour:'',
       Transactions:'',
       Price:'',
+      PaymentChoice:''
     })
   }
 

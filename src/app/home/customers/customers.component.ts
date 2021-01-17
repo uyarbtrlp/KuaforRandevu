@@ -73,7 +73,7 @@ export class CustomersComponent implements OnInit {
   
   onFilter(){
     this.customerService.filteredCustomers=this.customerService.customers;
-    this.customerService.filteredCustomers=this.customerService.customers.filter(x=>x.name.includes(this.customerService.searchKey))
+    this.customerService.filteredCustomers=this.customerService.customers.filter(x=>x.name.toLowerCase().includes(this.customerService.searchKey.toLowerCase()) ||x.surname.toLowerCase().includes(this.customerService.searchKey.toLowerCase()) )
     
   }
   onClear(){
